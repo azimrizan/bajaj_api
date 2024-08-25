@@ -12,7 +12,7 @@ app
     try {
       const data = req.body.data || [];
       const numbers = [];
-      const alphabets = new Set(); // Use a Set to ensure unique alphabets
+      const alphabets = new Set(); 
       let highest_lowercase_alphabet = "";
 
       for (const item of data) {
@@ -35,7 +35,7 @@ app
         email: "john@xyz.com",
         roll_number: "ABCD123",
         numbers: numbers,
-        alphabets: Array.from(alphabets).sort(), // Convert Set to Array and sort for consistent ordering
+        alphabets: Array.from(alphabets).sort(), 
         highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
       });
     } catch (error) {

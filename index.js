@@ -22,7 +22,7 @@ app
           alphabets.push(item);
           if (
             !highest_lowercase_alphabet ||
-            item.toLowerCase() > highest_lowercase_alphabet.toLowerCase()
+            (item === item.toLowerCase() && item > highest_lowercase_alphabet)
           ) {
             highest_lowercase_alphabet = item;
           }
@@ -36,7 +36,7 @@ app
         roll_number: "21BCE8448",
         numbers: numbers,
         alphabets: alphabets,
-        highest_alphabet: highest_lowercse_alphabet ? [highest_alphabet] : [], // Correct field name
+        highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
       });
     } catch (error) {
       console.error("Error processing request:", error);

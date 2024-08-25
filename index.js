@@ -9,34 +9,39 @@ app
     res.status(200).json({ operation_code: 1 });
   })
   .post((req, res) => {
-    const data = req.body.data || [];
-    const numbers = [];
-    const alphabets = [];
-    let highest_alphabet = "";
+    try {
+      const data = req.body.data || [];
+      const numbers = [];
+      const alphabets = [];
+      let highest_lowercase_alphabet = "";
 
-    for (const item of data) {
-      if (!isNaN(item)) {
-        numbers.push(item);
-      } else if (item.length === 1 && isNaN(item)) {
-        alphabets.push(item);
-        if (
-          !highest_alphabet ||
-          item.toUpperCase() > highest_alphabet.toUpperCase()
-        ) {
-          highest_alphabet = item;
+      for (const item of data) {
+        if (!isNaN(item)) {
+          numbers.push(item);
+        } else if (item.length === 1 && isNaN(item) && item === item.toLowerCase()) {
+          alphabets.push(item);
+          if (
+            !highest_lowercase_alphabet ||
+            item > highest_lowercase_alphabet
+          ) {
+            highest_lowercase_alphabet = item;
+          }
         }
       }
-    }
 
-    res.json({
-      is_success: true,
-      user_id: "azim_rizan_15032003",
-      email: "azim.21bce8448@vitapstudent.ac.in",
-      roll_number: "21BCE8448",
-      numbers: numbers,
-      alphabets: alphabets,
-      highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
-    });
+      res.json({
+        is_success: true,
+        user_id: "azim_rizan_15032003",
+        email: "azim.21bce8448@vitapstudent.ac.in",
+        roll_number: "21BCE8448",
+        numbers: numbers,
+        alphabets: alphabets,
+        highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
+      });
+    } catch (error) {
+      console.error("Error processing request:", error);
+      res.status(500).json({ is_success: false, message: "Internal Server Error" });
+    }
   });
 
 const port = process.env.PORT || 3000;

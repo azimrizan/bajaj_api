@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
 app.use(express.json());
 
 app
-  .route("/bfhl")
+  .route('/bfhl')
   .get((req, res) => {
     res.status(200).json({ operation_code: 1 });
   })
@@ -12,14 +12,14 @@ app
     try {
       const data = req.body.data || [];
       const numbers = [];
-      const alphabets = [];
+      const alphabets = new Set(); // Use a Set to ensure unique alphabets
       let highest_lowercase_alphabet = "";
 
       for (const item of data) {
         if (!isNaN(item)) {
           numbers.push(item);
         } else if (item.length === 1 && isNaN(item) && item === item.toLowerCase()) {
-          alphabets.push(item);
+          alphabets.add(item); // Add to Set to ensure uniqueness
           if (
             !highest_lowercase_alphabet ||
             item > highest_lowercase_alphabet
@@ -31,11 +31,11 @@ app
 
       res.json({
         is_success: true,
-        user_id: "azim_rizan_15032003",
-        email: "azim.21bce8448@vitapstudent.ac.in",
-        roll_number: "21BCE8448",
+        user_id: "john_doe_17091999",
+        email: "john@xyz.com",
+        roll_number: "ABCD123",
         numbers: numbers,
-        alphabets: alphabets,
+        alphabets: Array.from(alphabets).sort(), // Convert Set to Array and sort for consistent ordering
         highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
       });
     } catch (error) {

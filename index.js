@@ -35,7 +35,7 @@ app
       roll_number: "21BCE8448",
       numbers: numbers,
       alphabets: alphabets,
-      highest_alphabet: highest_alphabet ? [highest_alphabet] : [],
+      highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
     });
   });
 

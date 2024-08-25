@@ -18,11 +18,12 @@ app
       for (const item of data) {
         if (!isNaN(item)) {
           numbers.push(item);
-        } else if (item.length === 1 && isNaN(item) && item === item.toLowerCase()) {
-          alphabets.add(item); // Add to Set to ensure uniqueness
+        } else if (item.length === 1 && isNaN(item) && item.match(/[a-zA-Z]/)) {
+          alphabets.add(item);
           if (
-            !highest_lowercase_alphabet ||
-            item > highest_lowercase_alphabet
+            item === item.toLowerCase() &&
+            (!highest_lowercase_alphabet ||
+            item > highest_lowercase_alphabet)
           ) {
             highest_lowercase_alphabet = item;
           }
@@ -35,7 +36,7 @@ app
         email: "john@xyz.com",
         roll_number: "ABCD123",
         numbers: numbers,
-        alphabets: Array.from(alphabets).sort(), 
+        alphabets: Array.from(alphabets).sort(),
         highest_lowercase_alphabet: highest_lowercase_alphabet ? [highest_lowercase_alphabet] : [],
       });
     } catch (error) {
